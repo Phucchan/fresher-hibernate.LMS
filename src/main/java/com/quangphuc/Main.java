@@ -36,6 +36,7 @@ public class Main {
         ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
         SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
         if(sessionFactory != null) {
+            ((ClassPathXmlApplicationContext) context).close(); // Đóng context sau khi lấy SessionFactory
             System.out.println("SessionFactory bean is successfully created.");
         } else {
             System.out.println("Failed to create SessionFactory bean.");

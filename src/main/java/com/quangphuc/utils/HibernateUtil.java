@@ -9,7 +9,9 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
         try {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
-            return context.getBean("sessionFactory", SessionFactory.class);
+            SessionFactory factory = context.getBean("sessionFactory", SessionFactory.class);
+            context.close(); // Đóng context sau khi lấy SessionFactory
+            return factory;
         } catch (Exception ex) {
             throw new ExceptionInInitializerError("Không thể khởi tạo SessionFactory từ XML: " + ex);
         }
